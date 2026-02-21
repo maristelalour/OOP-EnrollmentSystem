@@ -1,31 +1,32 @@
 package org.example;
 
+import org.example.Entity.Course;
+import org.example.Entity.Student;
+import org.example.Service.CourseRegistration;
+import org.example.Service.StudentRegistration;
+import java.util.*;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        Student s = new Student();
-        s.setStudentID(2023);
-        s.setstudentName("John Doe");
-        s.setprogram("Information Technology \n");
 
-        Student s1 = new Student();
-        s1.setStudentID(2022);
-        s1.setstudentName("Jane Doe");
-        s1.setprogram("Information Technology \n");
+        StudentRegistration studentRegis = new StudentRegistration();
+        CourseRegistration courseRegis = new CourseRegistration();
 
-        Course c = new Course();
-        c.setcourseID(2351698);
-        c.setcourseName("Integrative Programming");
-        c.setprogram("Information Technology \n");
+        Student s3 = new Student(2022317151, "John Doe", "Information Technology");
+        Student s4 = new Student(2022317159, "Jane Doe", "Information Technology");
 
-        s.display();
-        s1.display();
-        c.display();
+        studentRegis.saveStudent(s3);
+        studentRegis.saveStudent(s4);
 
+        studentRegis.displayAllStudent();
 
+        Course c1 = new Course(0001, "Integrative Programming", "Information Technology");
+        courseRegis.save(c1);
 
+        courseRegis.displayAll();
 
 
 
