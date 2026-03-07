@@ -1,9 +1,11 @@
 package org.example;
 
 import org.example.Entity.Course;
+import org.example.Entity.Instructor;
 import org.example.Entity.Student;
 import org.example.Service.CourseRegistration;
 import org.example.Service.StudentRegistration;
+import org.example.Entity.Instructor;
 import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -27,6 +29,10 @@ public class Main {
         courseRegis.save(c1);
 
         courseRegis.displayAll();
+
+        Instructor instructor = new Instructor();
+        System.out.println(instructor.getInstructorID());
+        System.out.println(instructor.getInstructorName());
 
 
 
