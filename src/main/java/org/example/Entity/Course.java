@@ -1,35 +1,12 @@
 package org.example.Entity;
 
-public class Course {
-    private int courseID;
-    private String courseName;
+
+public class Course extends Person {
     private String program;
 
-    public Course(){
-
-    }
-
-    public Course(int CourseID, String courseName, String program){
-        this.courseID=courseID;
-        this.courseName=courseName;
+    public Course(String personID, String personName, String program){
+        super(personID,personName);
         this.program=program;
-
-    }
-
-    public void setcourseID(int courseID){
-        this.courseID= courseID;
-    }
-
-    public int getcourseID(){
-        return courseID;
-    }
-
-    public void setcourseName(String courseName){
-        this.courseName=courseName;
-    }
-
-    public String getcourseName(){
-        return courseName;
     }
 
     public void setprogram(String program){
@@ -41,10 +18,9 @@ public class Course {
     }
 
     public void display(){
-        System.out.printf("Course ID: %d \n", courseID);
-        System.out.printf("Course Name: %s \n", courseName);
+        System.out.printf("Course ID: %d \n", getPersonID());
+        System.out.printf("Course Name: %s \n", getPersonName());
         System.out.printf("Program: %s \n", program);
     }
-
 
 }

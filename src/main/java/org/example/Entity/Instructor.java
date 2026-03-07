@@ -1,41 +1,23 @@
 package org.example.Entity;
 
-public class Instructor {
-    String instructorID;
-    String instructorName;
-    String courses;
+public class Instructor extends Person {
+    private String courses;
 
     public Instructor(){
 
     }
 
-    public Instructor(String instructorID, String instructorName, String courses){
-        this.instructorID = instructorID;
-        this.instructorName = instructorName;
-        this.courses = courses;
-    }
-
-    public String getInstructorID() {
-        return instructorID;
-    }
-
-    public void setInstructorID(String instructorID) {
-        this.instructorID = instructorID;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
+    public Instructor(String personID, String personName,String courses){
+        super(personID, personName);
+        this.courses=courses;
     }
 
     public String getCourses(){
-        return getCourses();
+        return courses;
     }
 
-    public void setCourses(String courses) {
-        this.courses = courses;
+    public void setCourses(String courses){
+        this.courses= courses;
     }
+
 }
