@@ -38,11 +38,5 @@ public class Main {
         System.out.printf("Person ID: %s \n", person.getPersonID());
         System.out.printf("Person Name: %s",person.getPersonName());
 
-
-
-
-
-
-
     }
 }
