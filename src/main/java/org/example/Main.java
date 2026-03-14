@@ -43,9 +43,9 @@ public class Main {
 
         Instructor instructor = new Instructor();
 
-        Person person = new Person("2022317151","John Doe");
-        System.out.printf("Person ID: %s \n", person.getPersonID());
-        System.out.printf("Person Name: %s",person.getPersonName());
+        //Person person = new Person("2022317151","John Doe");
+        //System.out.printf("Person ID: %s \n", person.getPersonID());
+        //System.out.printf("Person Name: %s",person.getPersonName());
 
     }
 }

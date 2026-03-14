@@ -23,4 +23,9 @@ public class Course extends Person {
         System.out.printf("Program: %s \n", program);
     }
 
+    @Override
+    public void mainTask() {
+        System.out.println("Courses enrolled");
+
+    }
 }

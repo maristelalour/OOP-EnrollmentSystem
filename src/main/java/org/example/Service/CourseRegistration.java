@@ -10,6 +10,12 @@ public class CourseRegistration extends Person {
 
     }
 
+    @Override
+    public void mainTask() {
+        System.out.println("Student registers for the course");
+
+    }
+
     public void save(Course course){
         courseList.add(course);
     }

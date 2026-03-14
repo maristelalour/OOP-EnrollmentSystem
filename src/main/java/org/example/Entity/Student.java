@@ -7,6 +7,12 @@ public class Student extends Person {
 
     }
 
+    @Override
+    public void mainTask() {
+        System.out.println("Learns from Instructor");
+
+    }
+
     public Student(String personID, String personName, String program){
         super(personID,personName);
         this.program=program;

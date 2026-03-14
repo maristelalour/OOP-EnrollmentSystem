@@ -10,6 +10,12 @@ public class StudentRegistration extends Person {
 
     }
 
+    @Override
+    public void mainTask() {
+        System.out.println("Student registers in for the semester");
+
+    }
+
     public void saveStudent(Student student){
         studentLists.add(student);
     }
@@ -40,6 +46,8 @@ public class StudentRegistration extends Person {
             System.out.println();
         }
     }
+
+
 
 
 
