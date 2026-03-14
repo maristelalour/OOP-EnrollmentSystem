@@ -6,6 +6,7 @@ import org.example.Entity.Person;
 import org.example.Entity.Student;
 import org.example.Service.CourseRegistration;
 import org.example.Service.StudentRegistration;
+import org.example.Service.TuitionFeePayment;
 
 import java.sql.SQLOutput;
 import java.util.*;
@@ -14,6 +15,14 @@ import java.util.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+
+        TuitionFeePayment tuitionFeePayment = new TuitionFeePayment();
+        System.out.println(tuitionFeePayment.calculateTuitionFee(3,0));
+        tuitionFeePayment.makePayment(1000);
+
+        System.out.println(tuitionFeePayment.getBalance());
+        System.out.println(tuitionFeePayment.isFullyPaid());
+        System.out.println();
 
 
         StudentRegistration studentRegis = new StudentRegistration();
