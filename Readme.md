@@ -31,4 +31,15 @@ StudentRegistration Class
 ![img_6.png](img_6.png)
 ![img_7.png](img_7.png)
 
+# ABSTRACTION
+
+Person
+![img_8.png](img_8.png)
+
+Instructor
+![img_12.png](img_12.png)
+
+Student
+![img_10.png](img_10.png)
+
 
