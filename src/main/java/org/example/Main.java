@@ -4,6 +4,7 @@ import org.example.Entity.Course;
 import org.example.Entity.Instructor;
 import org.example.Entity.Person;
 import org.example.Entity.Student;
+import org.example.Service.CampusRegistrar;
 import org.example.Service.CourseRegistration;
 import org.example.Service.StudentRegistration;
 import org.example.Service.TuitionFeePayment;
@@ -11,8 +12,6 @@ import org.example.Service.TuitionFeePayment;
 import java.sql.SQLOutput;
 import java.util.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
@@ -42,10 +41,9 @@ public class Main {
         courseRegis.displayAll();
 
         Instructor instructor = new Instructor();
+        instructor.mainTask();
 
-        //Person person = new Person("2022317151","John Doe");
-        //System.out.printf("Person ID: %s \n", person.getPersonID());
-        //System.out.printf("Person Name: %s",person.getPersonName());
+        CampusRegistrar campusRegistrar = new CampusRegistrar(new StudentRegistration(), new CourseRegistration());
 
     }
 }

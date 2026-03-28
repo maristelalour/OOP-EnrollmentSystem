@@ -3,7 +3,7 @@ import org.example.Entity.Course;
 import org.example.Entity.Person;
 import java.util.*;
 
-public class CourseRegistration extends Person {
+public class CourseRegistration extends Person implements CourseReg{
     private ArrayList <Course> courseList = new ArrayList<>();
 
     public CourseRegistration(){
@@ -16,10 +16,12 @@ public class CourseRegistration extends Person {
 
     }
 
+    @Override
     public void save(Course course){
         courseList.add(course);
     }
 
+    @Override
     public void displayAll(){
         for (Course c : courseList){
             System.out.println("Course ID: " + c.getPersonID());
@@ -28,6 +30,7 @@ public class CourseRegistration extends Person {
         }
     }
 
+    @Override
     public void updateCourse(Course course){
         for (int i=0; i<courseList.size(); i++){
             if (courseList.get(i).getPersonID()==course.getPersonID()){
@@ -38,6 +41,7 @@ public class CourseRegistration extends Person {
         }
     }
 
+    @Override
     public void removeCourse(Course course){
         for (int i=0; i<courseList.size(); i++){
             if (courseList.get(i).getPersonID()==course.getPersonID()){
