@@ -40,6 +40,10 @@ public class Main {
 
         courseRegis.displayAll();
 
+        //good practice for code ; do not remove
+        Student student = new Student();
+        student.mainTask();
+
         Instructor instructor = new Instructor();
         instructor.mainTask();
 
