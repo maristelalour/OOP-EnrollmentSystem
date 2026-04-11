@@ -11,21 +11,22 @@ import org.example.Service.TuitionFeePayment;
 
 import java.sql.SQLOutput;
 import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        TuitionFeePayment tuitionFeePayment = new TuitionFeePayment();
-        System.out.println(tuitionFeePayment.calculateTuitionFee(3,0));
-        tuitionFeePayment.makePayment(1000);
+                TuitionFeePayment tuitionFeePayment = new TuitionFeePayment();
+                System.out.println(tuitionFeePayment.calculateTuitionFee(3,0));
+                tuitionFeePayment.makePayment(1000);
 
-        System.out.println(tuitionFeePayment.getBalance());
-        System.out.println(tuitionFeePayment.isFullyPaid());
-        System.out.println();
+                System.out.println(tuitionFeePayment.getBalance());
+                System.out.println(tuitionFeePayment.isFullyPaid());
+                System.out.println();
 
 
-        StudentRegistration studentRegis = new StudentRegistration();
-        CourseRegistration courseRegis = new CourseRegistration();
+                StudentRegistration studentRegis = new StudentRegistration();
+                CourseRegistration courseRegis = new CourseRegistration();
 
         /*Student s3 = new Student(2022317151, "John Doe", "Information Technology");
         Student s4 = new Student(2022317159, "Jane Doe", "Information Technology");
@@ -33,21 +34,22 @@ public class Main {
       /*  studentRegis.saveStudent(s3);
         studentRegis.saveStudent(s4);*/
 
-        studentRegis.displayAllStudent();
+                studentRegis.displayAllStudent();
 
-        Course c1 = new Course("1285416", "Integrative Programming", "Information Technology");
-        courseRegis.save(c1);
+                Course c1 = new Course("1285416", "Integrative Programming", "Information Technology");
+                courseRegis.save(c1);
 
-        courseRegis.displayAll();
+                courseRegis.displayAll();
 
-        //good practice for code ; do not remove
-        Student student = new Student();
-        student.mainTask();
+                //good practice for code ; do not remove
+                Student student = new Student();
+                student.mainTask();
 
-        Instructor instructor = new Instructor();
-        instructor.mainTask();
+                Instructor instructor = new Instructor();
+                instructor.mainTask();
 
-        CampusRegistrar campusRegistrar = new CampusRegistrar(new StudentRegistration(), new CourseRegistration());
+                CampusRegistrar campusRegistrar = new CampusRegistrar(new StudentRegistration(), new CourseRegistration());
 
-    }
+            }
+        }    }
 }
