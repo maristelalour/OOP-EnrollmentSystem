@@ -1,29 +1,28 @@
 package org.example.Service;
 
 public class TuitionFeePayment {
-    private final double PRICE_PER_UNIT = 1000;
-    private double balance;
+    private final double PRICE_PER_UNIT = 1000.0;
     private double totalTuitionFee;
+    private double amountPaid;
 
-    public double calculateTuitionFee(int units, double discountRate){
+    public double calculateTuitionFee(int units, double discountRate) {
         totalTuitionFee = units * PRICE_PER_UNIT;
-
-        if(discountRate != 0){
-            totalTuitionFee = totalTuitionFee - (totalTuitionFee * discountRate);
+        if (discountRate > 0) {
+            totalTuitionFee -= totalTuitionFee * discountRate;
         }
+        amountPaid = 0;
         return totalTuitionFee;
     }
 
-    public void makePayment(double amount){
-        balance = totalTuitionFee - amount;
+    public void makePayment(double amount) {
+        amountPaid += amount;
     }
 
-    public double getBalance(){
-        return balance;
+    public double getRemainingBalance() {
+        return totalTuitionFee - amountPaid;
     }
 
-    public boolean isFullyPaid(){
-        return balance == 0 ? true : false;
+    public boolean isFullyPaid() {
+        return getRemainingBalance() <= 0;
     }
-
 }
