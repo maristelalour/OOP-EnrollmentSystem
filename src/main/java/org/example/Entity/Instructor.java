@@ -1,29 +1,31 @@
 package org.example.Entity;
 
+import java.util.ArrayList;
+
 public class Instructor extends Person {
-    private String courses;
+    private ArrayList<String> courses;
 
-    public Instructor(){
+    public Instructor() {
+        this.courses = new ArrayList<>();
+    }
 
+    public Instructor(String personID, String personName) {
+        super(personID, personName);
+        this.courses = new ArrayList<>();
+    }
+
+    public ArrayList<String> getCourses() { return courses; }
+    public void addCourse(String course) { courses.add(course); }
+    public void setCourses(ArrayList<String> courses) { this.courses = courses; }
+
+    public void display() {
+        System.out.println("Instructor ID   : " + getPersonID());
+        System.out.println("Instructor Name : " + getPersonName());
+        System.out.println("Courses         : " + courses);
     }
 
     @Override
     public void mainTask() {
         System.out.println("Instructor teaches");
-
     }
-
-    public Instructor(String personID, String personName,String courses){
-        super(personID, personName);
-        this.courses=courses;
-    }
-
-    public String getCourses(){
-        return courses;
-    }
-
-    public void setCourses(String courses){
-        this.courses= courses;
-    }
-
 }

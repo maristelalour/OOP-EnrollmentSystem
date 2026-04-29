@@ -2,7 +2,6 @@ package org.example.Service;
 
 import org.example.Entity.Instructor;
 import org.example.Entity.Student;
-import org.example.Model.Course;
 import org.example.Model.Department;
 import org.example.Model.Section;
 

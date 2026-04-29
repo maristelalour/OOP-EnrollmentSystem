@@ -1,31 +1,28 @@
 package org.example.Entity;
 
-
-public class Course extends Person {
+public class Course {
+    private String courseID;
+    private String courseName;
     private String program;
 
-    public Course(String personID, String personName, String program){
-        super(personID,personName);
-        this.program=program;
+    public Course() {}
+
+    public Course(String courseID, String courseName, String program) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.program = program;
     }
 
-    public void setprogram(String program){
-        this.program=program;
-    }
+    public String getCourseID() { return courseID; }
+    public void setCourseID(String courseID) { this.courseID = courseID; }
+    public String getCourseName() { return courseName; }
+    public void setCourseName(String courseName) { this.courseName = courseName; }
+    public String getProgram() { return program; }
+    public void setProgram(String program) { this.program = program; }
 
-    public String getprogram(){
-        return program;
-    }
-
-    public void display(){
-        System.out.printf("Course ID: %d \n", getPersonID());
-        System.out.printf("Course Name: %s \n", getPersonName());
-        System.out.printf("Program: %s \n", program);
-    }
-
-    @Override
-    public void mainTask() {
-        System.out.println("Courses enrolled");
-
+    public void display() {
+        System.out.println("Course ID   : " + courseID);
+        System.out.println("Course Name : " + courseName);
+        System.out.println("Program     : " + program);
     }
 }
