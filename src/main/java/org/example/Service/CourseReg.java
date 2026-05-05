@@ -1,6 +1,6 @@
 package org.example.Service;
 
-import org.example.Entity.Course;
+import org.example.Model.Course;
 
 public interface CourseReg {
     void save(Course course);

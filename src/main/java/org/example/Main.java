@@ -1,15 +1,15 @@
 package org.example;
 
-import org.example.Entity.Course;
-import org.example.Entity.Instructor;
-import org.example.Entity.Student;
+import org.example.Model.Course;
+import org.example.Model.Instructor;
+import org.example.Model.Student;
 import org.example.Model.Department;
 import org.example.Model.Section;
 import org.example.Service.CampusRegistrarController;
 import org.example.Service.CourseRegistration;
 import org.example.Service.DepartmentRegistrationService;
 import org.example.Service.StudentRegistration;
-import org.example.Service.TuitionFeePayment;
+import org.example.Model.TuitionFeePayment;
 
 import java.util.Scanner;
 

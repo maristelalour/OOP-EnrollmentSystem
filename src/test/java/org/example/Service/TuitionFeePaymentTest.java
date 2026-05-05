@@ -1,10 +1,9 @@
 package org.example.Service;
 
+import org.example.Model.TuitionFeePayment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.beans.BeanProperty;
 
 import static org.junit.jupiter.api.Assertions.*;
 class TuitionFeePaymentTest {

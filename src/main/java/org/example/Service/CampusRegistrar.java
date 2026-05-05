@@ -1,7 +1,7 @@
 package org.example.Service;
 
-import org.example.Entity.Course;
-import org.example.Entity.Student;
+import org.example.Model.Course;
+import org.example.Model.Student;
 
 public class CampusRegistrar {
     private StudentReg studentRegis;

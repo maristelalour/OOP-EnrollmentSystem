@@ -1,17 +1,18 @@
-package org.example.Entity;
+package org.example.Model;
 
 public class Student extends Person {
     private String program;
-
-    public Student() {}
+    private TuitionFeePayment tuitionDetails;
 
     public Student(String personID, String personName, String program) {
         super(personID, personName);
         this.program = program;
+        this.tuitionDetails = new TuitionFeePayment(0);
     }
 
     public String getProgram() { return program; }
     public void setProgram(String program) { this.program = program; }
+    public TuitionFeePayment getTuitionDetails() { return tuitionDetails; }
 
     public void display() {
         System.out.println("Student ID   : " + getPersonID());
@@ -21,6 +22,6 @@ public class Student extends Person {
 
     @Override
     public void mainTask() {
-        System.out.println("Learns from Instructor");
+        System.out.println("Student learns from the instructor");
     }
 }

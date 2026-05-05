@@ -1,4 +1,4 @@
-package org.example.Entity;
+package org.example.Model;
 
 public abstract class Person {
     private String personID;

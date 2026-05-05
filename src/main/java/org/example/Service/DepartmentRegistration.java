@@ -2,8 +2,8 @@ package org.example.Service;
 
 import org.example.Model.Department;
 import org.example.Model.Section;
-import org.example.Entity.Instructor;
-import org.example.Entity.Student;
+import org.example.Model.Instructor;
+import org.example.Model.Student;
 
 public interface DepartmentRegistration {
     void saveDepartment(Department department);

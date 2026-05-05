@@ -1,6 +1,6 @@
 package org.example.Service;
-import org.example.Entity.Course;
-import org.example.Entity.Person;
+import org.example.Model.Course;
+import org.example.Model.Person;
 import java.util.*;
 
 public class CourseRegistration extends Person implements CourseReg{
