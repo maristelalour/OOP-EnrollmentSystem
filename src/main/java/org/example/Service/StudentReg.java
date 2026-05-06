@@ -1,10 +1,10 @@
 package org.example.Service;
 
-import org.example.Model.Student;
+import org.example.Model.*;
 
 public interface StudentReg {
     void saveStudent(Student student);
-    void updateStudent(Student student);
-    void removeStudent (Student student);
     void displayAllStudent();
+    boolean updateStudent(Student student);
+    boolean removeStudent(Student student);
 }

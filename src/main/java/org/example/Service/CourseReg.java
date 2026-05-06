@@ -4,7 +4,8 @@ import org.example.Model.Course;
 
 public interface CourseReg {
     void save(Course course);
-    void displayAll();
+    void displayAll(double pricePerUnit);
     void updateCourse(Course course);
-    void removeCourse(Course course);
+    void removeCourse(String courseID);
+    Course findByID(String id);
 }

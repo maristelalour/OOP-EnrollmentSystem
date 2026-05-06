@@ -32,9 +32,9 @@ public class StudentRegistration extends Person implements StudentReg {
     }
 
     @Override
-    public void removeStudent (Student student){
+    public void removeStudent (Student targetStudent){
         for (int i = 0; i < studentLists.size(); i++){
-            if(studentLists.get(i).getPersonID() == student.getPersonID()){
+            if(studentLists.get(i).getPersonID() == targetStudent.getPersonID()){
                 studentLists.remove(i);
                 break;
             }
