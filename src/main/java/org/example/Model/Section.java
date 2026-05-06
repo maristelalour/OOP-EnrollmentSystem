@@ -1,7 +1,5 @@
 package org.example.Model;
 
-import org.example.Model.Instructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,38 +15,78 @@ public class Section {
         this.sectionID = sectionID;
         this.sectionName = sectionName;
         this.maxCapacity = maxCapacity;
+        this.assignedInstructor = null;
         this.studentList = new ArrayList<>();
     }
 
-    public String getSectionID() { return sectionID; }
-    public void setSectionID(String sectionID) { this.sectionID = sectionID; }
-    public String getSectionName() { return sectionName; }
-    public void setSectionName(String sectionName) { this.sectionName = sectionName; }
-    public int getMaxCapacity() { return maxCapacity; }
-    public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
-    public Instructor getAssignedInstructor() { return assignedInstructor; }
-    public void setAssignedInstructor(Instructor instructor) { this.assignedInstructor = instructor; }
-    public Course getCourse() { return course; }
-    public void setCourse(Course course) { this.course = course; }
-    public List<Student> getStudentList() { return studentList; }
-
-    public void removeStudent(String studentID) {
-        studentList.removeIf(s -> s.getPersonID().equals(studentID));
+    public String getSectionID() {
+        return sectionID;
     }
 
-    public void display() {
-        System.out.println("  Section ID   : " + sectionID);
-        System.out.println("  Section Name : " + sectionName);
-        System.out.println("  Capacity     : " + studentList.size() + "/" + maxCapacity);
-        System.out.println("  Course       : " + (course != null ? course.getCourseName() : "Not assigned"));
-        System.out.println("  Instructor   : " + (assignedInstructor != null ? assignedInstructor.getPersonName() : "Not assigned"));
-        System.out.println("  Students     :");
-        if (studentList.isEmpty()) {
-            System.out.println("    No students enrolled.");
+    public void setSectionID(String sectionID) {
+        this.sectionID = sectionID;
+    }
+
+    public String getSectionName() {
+        return sectionName;
+    }
+
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public Instructor getAssignedInstructor() {
+        return assignedInstructor;
+    }
+
+    public void setAssignedInstructor(Instructor assignedInstructor) {
+        this.assignedInstructor = assignedInstructor;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public void displaySection() {
+        System.out.println("Section      : " + sectionName);
+
+        if (course != null) {
+            System.out.println("Course       : " + course.getCourseName() + " (" + course.getCourseID() + ")");
         } else {
-            for (Student s : studentList) {
-                System.out.println("    - [" + s.getPersonID() + "] " + s.getPersonName());
-            }
+            System.out.println("Course       : Unselected");
         }
+
+        System.out.println("Instructor   : " + (assignedInstructor != null ? assignedInstructor.getPersonName() : "Unselected"));
+        System.out.println("Total Students: " + studentList.size() + "/" + maxCapacity);
+
+        if (studentList.isEmpty()) {
+            System.out.println("Student List : (No students enrolled)");
+        } else {
+            System.out.print("Student List : ");
+            for (int i = 0; i < studentList.size(); i++) {
+                System.out.print(studentList.get(i).getPersonName() + (i < studentList.size() - 1 ? ", " : ""));
+            }
+            System.out.println();
+        }
+        System.out.println("-----------------------------------");
     }
 }

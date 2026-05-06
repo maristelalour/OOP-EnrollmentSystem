@@ -10,14 +10,22 @@ public class Student extends Person {
         this.tuitionDetails = new TuitionFeePayment(0);
     }
 
-    public String getProgram() { return program; }
-    public void setProgram(String program) { this.program = program; }
-    public TuitionFeePayment getTuitionDetails() { return tuitionDetails; }
+    public String getProgram() {
+        return program;
+    }
+
+    public void setProgram(String program) {
+        this.program = program;
+    }
+
+    public TuitionFeePayment getTuitionDetails() {
+        return tuitionDetails;
+    }
 
     public void display() {
         System.out.println("Student ID   : " + getPersonID());
         System.out.println("Student Name : " + getPersonName());
-        System.out.println("Program      : " + program);
+        System.out.println("Program      : " + getProgram());
     }
 
     @Override

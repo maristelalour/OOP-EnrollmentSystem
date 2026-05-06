@@ -1,24 +1,26 @@
 package org.example.Model;
 
-import java.util.ArrayList;
-
 public class Instructor extends Person {
-    private ArrayList<String> courses;
+    private String courses;
 
     public Instructor() {
-        this.courses = new ArrayList<>();
+
     }
 
-    public Instructor(String personID, String personName) {
+    public Instructor(String personID, String personName, String courses) {
         super(personID, personName);
-        this.courses = new ArrayList<>();
+        this.courses = courses;
     }
 
-    public ArrayList<String> getCourses() { return courses; }
-    public void addCourse(String course) { courses.add(course); }
-    public void setCourses(ArrayList<String> courses) { this.courses = courses; }
+    public String getCourses() {
+        return courses;
+    }
 
-    public void display() {
+    public void setCourses(String courses) {
+        this.courses = courses;
+    }
+
+    public void displayInst() {
         System.out.println("Instructor ID   : " + getPersonID());
         System.out.println("Instructor Name : " + getPersonName());
         System.out.println("Courses         : " + courses);
@@ -26,6 +28,15 @@ public class Instructor extends Person {
 
     @Override
     public void mainTask() {
-        System.out.println("Instructor teaches");
+        System.out.println("Instructor teaches: " + courses);
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "Name='" + getPersonName() + '\'' +
+                ", ID='" + getPersonID() + '\'' +
+                ", Courses='" + courses + '\'' +
+                '}';
     }
 }

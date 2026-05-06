@@ -1,6 +1,5 @@
 package org.example.Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
@@ -9,43 +8,50 @@ public class Department {
     private List<Instructor> instructorList;
     private List<Section> sectionList;
 
-    public Department(String departmentID, String departmentName) {
+    public Department(String departmentID, String departmentName, List<Instructor> instructorList, List<Section> sectionList) {
         this.departmentID = departmentID;
         this.departmentName = departmentName;
-        this.instructorList = new ArrayList<>();
-        this.sectionList = new ArrayList<>();
+        this.instructorList = instructorList;
+        this.sectionList = sectionList;
     }
 
-    public String getDepartmentID() { return departmentID; }
-    public void setDepartmentID(String departmentID) { this.departmentID = departmentID; }
-    public String getDepartmentName() { return departmentName; }
-    public void setDepartmentName(String departmentName) { this.departmentName = departmentName; }
-    public List<Instructor> getInstructorList() { return instructorList; }
-    public void setInstructorList(List<Instructor> instructorList) { this.instructorList = instructorList; }
-    public List<Section> getSectionList() { return sectionList; }
-    public void setSectionList(List<Section> sectionList) { this.sectionList = sectionList; }
-
-    public void addSection(Section section) { sectionList.add(section); }
-    public void removeSection(String sectionID) {
-        sectionList.removeIf(s -> s.getSectionID().equals(sectionID));
-    }
-    public void addInstructor(Instructor instructor) { instructorList.add(instructor); }
-    public void removeInstructor(String instructorID) {
-        instructorList.removeIf(i -> i.getPersonID().equals(instructorID));
+    public String getDepartmentID() {
+        return departmentID;
     }
 
-    public void display() {
-        System.out.println("Department ID   : " + departmentID);
-        System.out.println("Department Name : " + departmentName);
-        System.out.println("Sections        :");
-        if (sectionList.isEmpty()) {
-            System.out.println("  No sections available.");
-        } else {
-            for (Section s : sectionList) {
-                s.display();
-                System.out.println();
-            }
-        }
+    public void setDepartmentID(String departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public List<Instructor> getInstructorList() {
+        return instructorList;
+    }
+
+    public void setInstructorList(List<Instructor> instructorList) {
+        this.instructorList = instructorList;
+    }
+
+    public List<Section> getSectionList() {
+        return sectionList;
+    }
+
+    public void setSectionList(List<Section> sectionList) {
+        this.sectionList = sectionList;
+    }
+
+    public void displayDept() {
+        System.out.println("Department ID   : " + getDepartmentID());
+        System.out.println("Department Name : " + getDepartmentName());
+        System.out.println("Instructors     : " + getInstructorList());
+        System.out.println("Sections        : " + getSectionList() + "\n");
     }
 
     @Override

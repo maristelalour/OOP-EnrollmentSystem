@@ -4,24 +4,22 @@ public abstract class Person {
     private String personID;
     private String personName;
 
-    public Person(){
+    public Person() {}
 
-    }
-
-    public Person (String personID, String personName){
-        this.personID=personID;
-        this.personName=personName;
+    public Person(String personID, String personName) {
+        this.personID = personID;
+        this.personName = personName;
     }
 
     public String getPersonID() {
         return personID;
     }
 
-    public void setPersonID(String personID){
-        this.personID= personID;
+    public void setPersonID(String personID) {
+        this.personID = personID;
     }
 
-    public String getPersonName(){
+    public String getPersonName() {
         return personName;
     }
 
@@ -29,5 +27,6 @@ public abstract class Person {
         this.personName = personName;
     }
 
-    public abstract void  mainTask();
+
+    public abstract void mainTask();
 }
