@@ -3,8 +3,8 @@ package org.example.Service;
 import org.example.Model.Student;
 
 public interface TuitionReg {
-    double calculateTuitionFee(int units, double discounts);
-    void makePayment(Student student, double amount);
-    double getRemainingBalance(Student student);
-    boolean isFullyPaid(Student student);
+    double calculateTuitionFee(int numUnits, double discount);
+    void makePayment(Student studentData, double amount);
+    double getRemainingBalance(Student studentData);
+    boolean isFullyPaid(Student studentData);
 }

@@ -42,7 +42,6 @@ public class Department {
     public List<Section> getSectionList() {
         return sectionList;
     }
-
     public void setSectionList(List<Section> sectionList) {
         this.sectionList = sectionList;
     }

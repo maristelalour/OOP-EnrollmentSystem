@@ -4,6 +4,10 @@ public class Student extends Person {
     private String program;
     private TuitionFeePayment tuitionDetails;
 
+    public Student() {
+
+    }
+
     public Student(String personID, String personName, String program) {
         super(personID, personName);
         this.program = program;

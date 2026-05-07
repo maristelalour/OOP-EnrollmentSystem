@@ -1,60 +1,62 @@
 package org.example.Service;
 
-import org.example.Model.TuitionFeePayment;
+import org.example.Model.Student;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 class TuitionFeePaymentTest {
-    //arrange
-    private TuitionFeePayment tuitionFeePayment;
+
+    private TuitionRegistration tuitionService;
+    private Student testStudent;
 
     @BeforeEach
-    void setup(){
-        tuitionFeePayment = new TuitionFeePayment();
+    void setup() {
+        tuitionService = new TuitionRegistration();
+        testStudent = new Student("S001", "Maria Santos", "BSIT");
     }
 
     @Test
-    @DisplayName("Calculate Tuition Fee")
-    void shouldCalculateCorrectTuitionFeeWithNoDiscount(){
-
-        //assert
-        assertEquals(5000, tuitionFeePayment.calculateTuitionFee(5,0));
+    void shouldCalculateCorrectTuitionFeeWithoutDiscount() {
+        // Logic check: 5 units * 1000 = 5000
+        assertEquals(5000, tuitionService.calculateTuitionFee(5, 0));
     }
 
     @Test
-    void shouldCalculateCorrectTuitionFeeWithDiscount(){
-
-        //assert
-        assertEquals(4500, tuitionFeePayment.calculateTuitionFee(5,0.10));
+    void shouldCalculateCorrectTuitionFeeWithDiscount() {
+        // Logic check: 5000 - 10% = 4500
+        assertEquals(4500, tuitionService.calculateTuitionFee(5, 0.10));
     }
 
     @Test
-    void shouldMakeAPaymentWorth500(){
-        tuitionFeePayment.calculateTuitionFee(5,0); //pag wala 'to hindi mag rrun si makePayment kase calc first
-        tuitionFeePayment.makePayment(500);
-
-        //assert
-        assertEquals(4500, tuitionFeePayment.getBalance());
+    void shouldMakePaymentOf600() {
+        // Arrange
+        double total = tuitionService.calculateTuitionFee(5, 0);
+        testStudent.getTuitionDetails().setBalance(total);
+        // Act
+        tuitionService.makePayment(testStudent, 600);
+        // Assert: 5000 - 600 = 4400
+        assertEquals(4400, testStudent.getTuitionDetails().getBalance());
     }
 
     @Test
-    void shouldCheckIfFullyPaid(){
-        tuitionFeePayment.calculateTuitionFee(5,0);
-        tuitionFeePayment.makePayment(5000);
-
-        //assert
-        assertTrue(tuitionFeePayment.isFullyPaid());
+    void shouldBeFullyPaid() {
+        // Arrange
+        testStudent.getTuitionDetails().setBalance(5000);
+        // Act
+        tuitionService.makePayment(testStudent, 5000);
+        // Assert
+        assertTrue(tuitionService.isFullyPaid(testStudent));
     }
 
     @Test
-    void shouldCheckIfNotFullyPaid(){
-        tuitionFeePayment.calculateTuitionFee(5,0);
-        tuitionFeePayment.makePayment(400);
-
-        //assert
-        assertFalse(tuitionFeePayment.isFullyPaid());
+    void shouldNotBeFullyPaid() {
+        // Arrange
+        testStudent.getTuitionDetails().setBalance(5000);
+        // Act
+        tuitionService.makePayment(testStudent, 1000);
+        // Assert
+        assertFalse(tuitionService.isFullyPaid(testStudent));
     }
-
 }

@@ -1,59 +1,73 @@
 package org.example.Service;
+
+import org.example.Exception.DuplicateIDException;
 import org.example.Model.Student;
-import org.example.Model.Person;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class StudentRegistration extends Person implements StudentReg {
-    private final ArrayList<Student> studentLists = new ArrayList();
+public class StudentRegistration implements StudentReg {
+    private ArrayList<Student> studentList = new ArrayList<>();
 
-    public StudentRegistration(){
-
+    @Override
+    public void saveStudent(Student studentData) {
+        if (findByID(studentData.getPersonID()) != null) {
+            throw new DuplicateIDException("Error: Student ID " + studentData.getPersonID() + " already exists!");
+        }
+        studentList.add(studentData);
+        System.out.println("Student " + studentData.getPersonName() + " registered successfully.");
     }
 
     @Override
-    public void mainTask() {
-        System.out.println("Student registers in for the semester");
-
+    public void displayAllStudent() {
+        if (studentList.isEmpty()) {
+            System.out.println("No students registered.");
+            return;
+        }
+        for (Student s : studentList) {
+            System.out.println("\nStudent ID   : " + s.getPersonID());
+            System.out.println("Student Name : " + s.getPersonName());
+            System.out.println("Program      : " + s.getProgram());
+        }
     }
 
     @Override
-    public void saveStudent(Student student){
-        studentLists.add(student);
-    }
-
-    @Override
-    public void updateStudent(Student student){
-        for (int i = 0; i < studentLists.size(); i++){
-            if (studentLists.get(i).getPersonID() == student.getPersonID()){
-                studentLists.set(i,student);
-                break;
+    public boolean updateStudent(Student studentInfo) {
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getPersonID().equalsIgnoreCase(studentInfo.getPersonID())) {
+                studentList.set(i, studentInfo);
+                return true;
             }
         }
+        return false;
     }
 
     @Override
-    public void removeStudent (Student targetStudent){
-        for (int i = 0; i < studentLists.size(); i++){
-            if(studentLists.get(i).getPersonID() == targetStudent.getPersonID()){
-                studentLists.remove(i);
-                break;
+    public boolean removeStudent(Student studentRecord) {
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getPersonID().equalsIgnoreCase(studentRecord.getPersonID())) {
+                studentList.remove(i);
+                return true;
             }
         }
+        return false;
     }
 
     @Override
-    public void displayAllStudent(){
-        for (Student s: studentLists){
-            System.out.println("Student ID: " + s.getPersonID());
-            System.out.println("Student Name: " + s.getPersonName());
-            System.out.println("Program: " + s.getprogram());
-            System.out.println();
+    public Student findByID(String id) {
+        for (Student s : studentList) {
+            if (s.getPersonID().equalsIgnoreCase(id)) {
+                return s;
+            }
         }
+        return null;
     }
 
+    @Override
+    public List<Student> getAllStudents() {
+        return studentList;
+    }
 
-
-
-
-
+    public ArrayList<Student> getStudentList() {
+        return studentList;
+    }
 }

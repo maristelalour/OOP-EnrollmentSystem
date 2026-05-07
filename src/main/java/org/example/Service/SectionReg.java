@@ -5,10 +5,10 @@ import org.example.Model.Student;
 import java.util.*;
 
 public interface SectionReg {
-    void save(Section section);
+    void save(Section sectionData);
     List<Section> displayAll();
     Section findBySectionName(String sectionName);
-    void updateSection(String oldName, Section updatedSection);
-    void addStudentToSection(String sectionName, Student student);
+    void updateSection(String sectionName, Section sectionInfo);
+    void addStudentToSection(String sectionName, Student studentData);
     void deleteSection(String sectionName);
 }

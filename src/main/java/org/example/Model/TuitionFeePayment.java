@@ -4,8 +4,9 @@ public class TuitionFeePayment {
     private double totalTuitionFee;
     private double balance;
 
-    public TuitionFeePayment(double balance) {
-        this.balance = balance;
+    public TuitionFeePayment(double totalTuitionFee) {
+        this.totalTuitionFee = totalTuitionFee;
+        this.balance = totalTuitionFee;
     }
 
     public double getTotalTuitionFee() {
@@ -19,6 +20,7 @@ public class TuitionFeePayment {
     public double getBalance() {
         return balance;
     }
+
     public void setBalance(double balance) {
         this.balance = balance;
     }

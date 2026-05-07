@@ -1,72 +1,59 @@
 package org.example;
 
-import org.example.Model.Course;
-import org.example.Model.Instructor;
-import org.example.Model.Student;
-import org.example.Model.Department;
-import org.example.Model.Section;
-import org.example.Service.CampusRegistrarController;
-import org.example.Service.CourseRegistration;
-import org.example.Service.DepartmentRegistrationService;
-import org.example.Service.StudentRegistration;
-import org.example.Model.TuitionFeePayment;
-
+import org.example.Model.*;
+import org.example.Service.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
-    static Scanner scanner = new Scanner(System.in);
-    static StudentRegistration studentRegis = new StudentRegistration();
-    static CourseRegistration courseRegis = new CourseRegistration();
-    static DepartmentRegistrationService deptService = new DepartmentRegistrationService();
-    static CampusRegistrarController controller = new CampusRegistrarController(deptService, studentRegis, courseRegis);
-    static TuitionFeePayment tuitionFeePayment = new TuitionFeePayment();
+    static Scanner input = new Scanner(System.in);
+    static StudentReg studentRepo = new StudentRegistration();
+    static CourseReg courseRepo = new CourseRegistration();
+    static DepartmentRegis deptRepo = new DepartmentRegistration();
+    static SectionReg sectionRepo = new SectionRegistration();
+    static TuitionReg financialRepo = new TuitionRegistration();
+    static EnrollmentReg enrollmentEngine = new EnrollmentService();
+    static InstructorReg facultyRepo = new InstructorRegistration();
+    static CampusRegistrar registrar = new CampusRegistrar(
+            studentRepo, courseRepo, deptRepo, sectionRepo,
+            financialRepo, enrollmentEngine, facultyRepo);
 
     public static void main(String[] args) {
-
-        // good practice for code ; do not remove
-        Student student = new Student();
-        student.mainTask();
-
-        Instructor instructor = new Instructor();
-        instructor.mainTask();
-        System.out.println();
-
-        int choice;
-
-        do {
-            System.out.println("\n===== ENROLLMENT SYSTEM =====");
+        boolean running = true;
+        while (running) {
+            System.out.println("\n====================================");
+            System.out.println("       ENROLLMENT SYSTEM MENU       ");
+            System.out.println("====================================");
             System.out.println("[1] Student Management");
             System.out.println("[2] Course Management");
-            System.out.println("[3] Department Management");
-            System.out.println("[4] Tuition Fee");
+            System.out.println("[3] Instructor Management");
+            System.out.println("[4] Section Management");
+            System.out.println("[5] Department Management");
+            System.out.println("[6] Enrollment");
+            System.out.println("[7] Tuition Fee Management");
+            System.out.println("[8] View Institutional Hierarchy");
             System.out.println("[0] Exit");
+            System.out.println("====================================");
             System.out.print("Enter choice: ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
-
+            String choice = input.nextLine().trim();
             switch (choice) {
-                case 1:
-                    studentMenu();
-                    break;
-                case 2:
-                    courseMenu();
-                    break;
-                case 3:
-                    departmentMenu();
-                    break;
-                case 4:
-                    tuitionMenu();
-                    break;
-                case 0:
+                case "1": studentMenu(); break;
+                case "2": courseMenu(); break;
+                case "3": instructorMenu(); break;
+                case "4": sectionMenu(); break;
+                case "5": departmentMenu(); break;
+                case "6": enrollmentMenu(); break;
+                case "7": tuitionMenu(); break;
+                case "8": registrar.displayHierarchy(); break;
+                case "0":
                     System.out.println("Exiting system. Goodbye!");
+                    running = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");
             }
-        } while (choice != 0);
-
-        scanner.close();
+        }
+        input.close();
     }
 
     // ===== STUDENT MENU =====
@@ -77,38 +64,33 @@ public class Main {
         System.out.println("[3] Update Student");
         System.out.println("[4] Remove Student");
         System.out.print("Enter choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
+        String choice = input.nextLine().trim();
         switch (choice) {
-            case 1:
+            case "1":
                 System.out.print("Enter Student ID: ");
-                String sID = scanner.nextLine();
+                String sID = input.nextLine().trim();
                 System.out.print("Enter Student Name: ");
-                String sName = scanner.nextLine();
+                String sName = input.nextLine().trim();
                 System.out.print("Enter Program: ");
-                String sProgram = scanner.nextLine();
-                controller.saveStudent(new Student(sID, sName, sProgram));
-                System.out.println("Student added!");
+                String sProgram = input.nextLine().trim();
+                registrar.addStudent(new Student(sID, sName, sProgram));
                 break;
-            case 2:
-                controller.displayAllStudents();
+            case "2":
+                registrar.displayAllStudents();
                 break;
-            case 3:
+            case "3":
                 System.out.print("Enter Student ID to update: ");
-                String usID = scanner.nextLine();
+                String usID = input.nextLine().trim();
                 System.out.print("Enter New Name: ");
-                String usName = scanner.nextLine();
+                String usName = input.nextLine().trim();
                 System.out.print("Enter New Program: ");
-                String usProgram = scanner.nextLine();
-                studentRegis.updateStudent(new Student(usID, usName, usProgram));
-                System.out.println("Student updated!");
+                String usProgram = input.nextLine().trim();
+                registrar.updateStudent(new Student(usID, usName, usProgram));
                 break;
-            case 4:
+            case "4":
                 System.out.print("Enter Student ID to remove: ");
-                String rsID = scanner.nextLine();
-                studentRegis.removeStudent(new Student(rsID, "", ""));
-                System.out.println("Student removed!");
+                String rsID = input.nextLine().trim();
+                registrar.removeStudent(rsID);
                 break;
             default:
                 System.out.println("Invalid choice.");
@@ -123,38 +105,167 @@ public class Main {
         System.out.println("[3] Update Course");
         System.out.println("[4] Remove Course");
         System.out.print("Enter choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
+        String choice = input.nextLine().trim();
         switch (choice) {
-            case 1:
+            case "1":
                 System.out.print("Enter Course ID: ");
-                String cID = scanner.nextLine();
+                String cID = input.nextLine().trim();
                 System.out.print("Enter Course Name: ");
-                String cName = scanner.nextLine();
+                String cName = input.nextLine().trim();
                 System.out.print("Enter Program: ");
-                String cProgram = scanner.nextLine();
-                controller.saveCourse(new Course(cID, cName, cProgram));
-                System.out.println("Course added!");
+                String cProgram = input.nextLine().trim();
+                int cUnits = 0;
+                try {
+                    System.out.print("Enter Units: ");
+                    cUnits = Integer.parseInt(input.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Defaulting to 3 units.");
+                    cUnits = 3;
+                }
+                registrar.addCourse(new Course(cID, cName, cProgram, cUnits));
                 break;
-            case 2:
-                controller.displayAllCourses();
+            case "2":
+                registrar.displayAllCourses();
                 break;
-            case 3:
+            case "3":
                 System.out.print("Enter Course ID to update: ");
-                String ucID = scanner.nextLine();
+                String ucID = input.nextLine().trim();
                 System.out.print("Enter New Course Name: ");
-                String ucName = scanner.nextLine();
+                String ucName = input.nextLine().trim();
                 System.out.print("Enter New Program: ");
-                String ucProgram = scanner.nextLine();
-                courseRegis.updateCourse(new Course(ucID, ucName, ucProgram));
-                System.out.println("Course updated!");
+                String ucProgram = input.nextLine().trim();
+                int ucUnits = 0;
+                try {
+                    System.out.print("Enter New Units: ");
+                    ucUnits = Integer.parseInt(input.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Defaulting to 3 units.");
+                    ucUnits = 3;
+                }
+                registrar.updateCourse(new Course(ucID, ucName, ucProgram, ucUnits));
                 break;
-            case 4:
+            case "4":
                 System.out.print("Enter Course ID to remove: ");
-                String rcID = scanner.nextLine();
-                courseRegis.removeCourse(new Course(rcID, "", ""));
-                System.out.println("Course removed!");
+                String rcID = input.nextLine().trim();
+                registrar.removeCourse(rcID);
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    // ===== INSTRUCTOR MENU =====
+    static void instructorMenu() {
+        System.out.println("\n--- Instructor Management ---");
+        System.out.println("[1] Add Instructor");
+        System.out.println("[2] Display All Instructors");
+        System.out.println("[3] Update Instructor");
+        System.out.println("[4] Remove Instructor");
+        System.out.println("[5] Assign Instructor to Section");
+        System.out.print("Enter choice: ");
+        String choice = input.nextLine().trim();
+        switch (choice) {
+            case "1":
+                System.out.print("Enter Instructor ID: ");
+                String iID = input.nextLine().trim();
+                System.out.print("Enter Instructor Name: ");
+                String iName = input.nextLine().trim();
+                System.out.print("Enter Course Handled: ");
+                String iCourse = input.nextLine().trim();
+                registrar.addInstructor(new Instructor(iID, iName, iCourse));
+                break;
+            case "2":
+                registrar.displayAllInstructors();
+                break;
+            case "3":
+                System.out.print("Enter Instructor ID to update: ");
+                String uiID = input.nextLine().trim();
+                System.out.print("Enter New Name: ");
+                String uiName = input.nextLine().trim();
+                System.out.print("Enter New Course Handled: ");
+                String uiCourse = input.nextLine().trim();
+                registrar.updateInstructor(uiID, new Instructor(uiID, uiName, uiCourse));
+                break;
+            case "4":
+                System.out.print("Enter Instructor ID to remove: ");
+                String riID = input.nextLine().trim();
+                registrar.removeInstructor(riID);
+                break;
+            case "5":
+                System.out.print("Enter Instructor ID: ");
+                String aiID = input.nextLine().trim();
+                System.out.print("Enter Section Name: ");
+                String aiSection = input.nextLine().trim();
+                registrar.assignInstructorToSection(aiID, aiSection);
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    // ===== SECTION MENU =====
+    static void sectionMenu() {
+        System.out.println("\n--- Section Management ---");
+        System.out.println("[1] Add Section");
+        System.out.println("[2] Display All Sections");
+        System.out.println("[3] Update Section");
+        System.out.println("[4] Delete Section");
+        System.out.println("[5] View Section Details");
+        System.out.println("[6] Assign Course to Section");
+        System.out.print("Enter choice: ");
+        String choice = input.nextLine().trim();
+        switch (choice) {
+            case "1":
+                System.out.print("Enter Section ID: ");
+                String sID = input.nextLine().trim();
+                System.out.print("Enter Section Name: ");
+                String sName = input.nextLine().trim();
+                int sCap = 0;
+                try {
+                    System.out.print("Enter Max Capacity: ");
+                    sCap = Integer.parseInt(input.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Defaulting to 30.");
+                    sCap = 30;
+                }
+                registrar.addSection(new Section(sID, sName, sCap));
+                break;
+            case "2":
+                registrar.displayAllSections();
+                break;
+            case "3":
+                System.out.print("Enter Section Name to update: ");
+                String usName = input.nextLine().trim();
+                System.out.print("Enter New Section ID: ");
+                String usID = input.nextLine().trim();
+                System.out.print("Enter New Section Name: ");
+                String usNewName = input.nextLine().trim();
+                int usCap = 0;
+                try {
+                    System.out.print("Enter New Max Capacity: ");
+                    usCap = Integer.parseInt(input.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Defaulting to 30.");
+                    usCap = 30;
+                }
+                registrar.updateSection(usName, new Section(usID, usNewName, usCap));
+                break;
+            case "4":
+                System.out.print("Enter Section Name to delete: ");
+                String dsName = input.nextLine().trim();
+                registrar.deleteSection(dsName);
+                break;
+            case "5":
+                System.out.print("Enter Section Name: ");
+                String vsName = input.nextLine().trim();
+                registrar.displaySectionDetails(vsName);
+                break;
+            case "6":
+                System.out.print("Enter Section Name: ");
+                String acSection = input.nextLine().trim();
+                System.out.print("Enter Course ID: ");
+                String acCourse = input.nextLine().trim();
+                registrar.assignCourseToSection(acSection, acCourse);
                 break;
             default:
                 System.out.println("Invalid choice.");
@@ -168,55 +279,56 @@ public class Main {
         System.out.println("[2] Display All Departments");
         System.out.println("[3] Add Section to Department");
         System.out.println("[4] Add Instructor to Department");
-        System.out.println("[5] Add Student to Section");
         System.out.print("Enter choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
+        String choice = input.nextLine().trim();
         switch (choice) {
-            case 1:
+            case "1":
                 System.out.print("Enter Department ID: ");
-                String dID = scanner.nextLine();
+                String dID = input.nextLine().trim();
                 System.out.print("Enter Department Name: ");
-                String dName = scanner.nextLine();
-                controller.saveDepartment(new Department(dID, dName));
-                System.out.println("Department added!");
+                String dName = input.nextLine().trim();
+                registrar.addDepartment(new Department(dID, dName,
+                        new ArrayList<>(), new ArrayList<>()));
                 break;
-            case 2:
-                controller.displayAllDepartments();
+            case "2":
+                registrar.displayAllDepartments();
                 break;
-            case 3:
-                System.out.print("Enter Department ID: ");
-                String sdID = scanner.nextLine();
-                System.out.print("Enter Section ID: ");
-                String sID = scanner.nextLine();
+            case "3":
+                System.out.print("Enter Department Name: ");
+                String sdName = input.nextLine().trim();
                 System.out.print("Enter Section Name: ");
-                String sName = scanner.nextLine();
-                controller.addSectionToDepartment(sdID, new Section(sID, sName));
+                String ssName = input.nextLine().trim();
+                registrar.addSectionToDepartment(sdName, ssName);
                 break;
-            case 4:
-                System.out.print("Enter Department ID: ");
-                String idID = scanner.nextLine();
+            case "4":
+                System.out.print("Enter Department Name: ");
+                String idName = input.nextLine().trim();
                 System.out.print("Enter Instructor ID: ");
-                String iID = scanner.nextLine();
-                System.out.print("Enter Instructor Name: ");
-                String iName = scanner.nextLine();
-                System.out.print("Enter Course Handled: ");
-                String iCourse = scanner.nextLine();
-                controller.addInstructorToDepartment(idID, new Instructor(iID, iName, iCourse));
+                String iiID = input.nextLine().trim();
+                registrar.addInstructorToDepartment(idName, iiID);
                 break;
-            case 5:
-                System.out.print("Enter Department ID: ");
-                String stDID = scanner.nextLine();
-                System.out.print("Enter Section ID: ");
-                String stSID = scanner.nextLine();
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    // ===== ENROLLMENT MENU =====
+    static void enrollmentMenu() {
+        System.out.println("\n--- Enrollment ---");
+        System.out.println("[1] Enroll Student in Section");
+        System.out.println("[2] View Department Hierarchy");
+        System.out.print("Enter choice: ");
+        String choice = input.nextLine().trim();
+        switch (choice) {
+            case "1":
+                System.out.print("Enter Section Name: ");
+                String sectionName = input.nextLine().trim();
                 System.out.print("Enter Student ID: ");
-                String stID = scanner.nextLine();
-                System.out.print("Enter Student Name: ");
-                String stName = scanner.nextLine();
-                System.out.print("Enter Program: ");
-                String stProgram = scanner.nextLine();
-                controller.addStudentToSection(stDID, stSID, new Student(stID, stName, stProgram));
+                String studentID = input.nextLine().trim();
+                registrar.enrollStudent(sectionName, studentID);
+                break;
+            case "2":
+                registrar.displayHierarchy();
                 break;
             default:
                 System.out.println("Invalid choice.");
@@ -225,36 +337,44 @@ public class Main {
 
     // ===== TUITION MENU =====
     static void tuitionMenu() {
-        System.out.println("\n--- Tuition Fee ---");
+        System.out.println("\n--- Tuition Fee Management ---");
         System.out.println("[1] Calculate Tuition Fee");
         System.out.println("[2] Make Payment");
         System.out.println("[3] Check Balance");
-        System.out.println("[4] Check Payment Status");
         System.out.print("Enter choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
+        String choice = input.nextLine().trim();
         switch (choice) {
-            case 1:
-                System.out.print("Enter number of units: ");
-                int units = scanner.nextInt();
-                System.out.print("Enter discount rate (0 if none): ");
-                double discount = scanner.nextDouble();
-                scanner.nextLine();
-                System.out.println("Total Tuition Fee: " + tuitionFeePayment.calculateTuitionFee(units, discount));
+            case "1":
+                System.out.print("Enter Student ID: ");
+                String tID = input.nextLine().trim();
+                int units = 0;
+                try {
+                    System.out.print("Enter Number of Units: ");
+                    units = Integer.parseInt(input.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Defaulting to 3 units.");
+                    units = 3;
+                }
+                registrar.calculateAndSetTuition(tID, units);
                 break;
-            case 2:
-                System.out.print("Enter payment amount: ");
-                double amount = scanner.nextDouble();
-                scanner.nextLine();
-                tuitionFeePayment.makePayment(amount);
-                System.out.println("Remaining balance: " + tuitionFeePayment.getBalance());
+            case "2":
+                System.out.print("Enter Student ID: ");
+                String pID = input.nextLine().trim();
+                double amount = 0;
+                try {
+                    System.out.print("Enter Payment Amount: ");
+                    amount = Double.parseDouble(input.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid amount.");
+                }
+                if (amount > 0) {
+                    registrar.processPayment(pID, amount);
+                }
                 break;
-            case 3:
-                System.out.println("Balance: " + tuitionFeePayment.getBalance());
-                break;
-            case 4:
-                System.out.println("Fully Paid: " + tuitionFeePayment.isFullyPaid());
+            case "3":
+                System.out.print("Enter Student ID: ");
+                String bID = input.nextLine().trim();
+                registrar.checkBalance(bID);
                 break;
             default:
                 System.out.println("Invalid choice.");
