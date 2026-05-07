@@ -42,6 +42,7 @@ public class Department {
     public List<Section> getSectionList() {
         return sectionList;
     }
+
     public void setSectionList(List<Section> sectionList) {
         this.sectionList = sectionList;
     }
@@ -49,8 +50,29 @@ public class Department {
     public void displayDept() {
         System.out.println("Department ID   : " + getDepartmentID());
         System.out.println("Department Name : " + getDepartmentName());
-        System.out.println("Instructors     : " + getInstructorList());
-        System.out.println("Sections        : " + getSectionList() + "\n");
+
+        if (instructorList == null || instructorList.isEmpty()) {
+            System.out.println("Instructors     : (None)");
+        } else {
+            System.out.print("Instructors     : ");
+            for (int i = 0; i < instructorList.size(); i++) {
+                System.out.print(instructorList.get(i).getPersonName());
+                if (i < instructorList.size() - 1) System.out.print(", ");
+            }
+            System.out.println();
+        }
+
+        if (sectionList == null || sectionList.isEmpty()) {
+            System.out.println("Sections        : (None)");
+        } else {
+            System.out.print("Sections        : ");
+            for (int i = 0; i < sectionList.size(); i++) {
+                System.out.print(sectionList.get(i).getSectionName());
+                if (i < sectionList.size() - 1) System.out.print(", ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     @Override
